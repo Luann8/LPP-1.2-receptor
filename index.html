@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/Luann8/LPP-1.2-usuarios/main/icon.ico?token=GHSAT0AAAAAACG3LP2OWTGU3MSMQSRORH36ZIQXDRQ" type="image/x-icon">
+    <title>Monitoramento de Patentes</title>
+    <style>
+        /* Estilos CSS */
+        .navbar {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .nav-list {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-list li {
+            padding: 10px;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-list a:hover {
+            text-decoration: underline;
+        }
+
+        .patente-list {
+            margin-top: 20px;
+        }
+
+        .patente-items {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .patente-item {
+            flex: 0 0 calc(33.333% - 20px); /* Para criar três colunas */
+            padding: 10px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            background-color: #f8f8f8;
+        }
+
+        .patente-item:hover {
+            background-color: #ddd;
+        }
+
+        .cliente-info {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .categoria-total {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Cores para cada categoria */
+        .categoria-vencidas {
+            background-color: #FF5733; /* Vermelho */
+        }
+
+        .categoria-atrasadas {
+            background-color: #F9C922; /* Amarelo */
+        }
+
+        .categoria-programadas {
+            background-color: #2EC4B6; /* Verde */
+        }
+
+        .categoria-acompanhamento {
+            background-color: #7d848d; /* Azul Escuro */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li><a href="#" id="vencidas" style="color: #FF5733;"> Vencidas </a></li>
+            <li><a href="#" id="atrasadas" style="color: #f9c922;">Atrasadas</a></li>
+            <li><a href="#" id="programadas" style="color: #2EC4B6;">Programadas</a></li>
+            <li><a href="#" id="acompanhamento">Em Acompanhamento</a></li>
+        </ul>
+    </nav>
+
+    <div class="patente-list">
+        <!-- Exemplo de patentes com informações detalhadas -->
+        <div class="patente-item categoria-vencidas" 
+             data-nome="Licença Vencida 1" 
+             data-cliente="Cliente A" 
+             data-tipo="Tipo A" 
+             data-numero="12345" 
+             data-protocolar="01/05/2022" 
+             data-vencimento="30/09/2022">
+            <h3>Licença Vencida 1</h3>
+            <p>Cliente: Cliente A</p>
+            <p>Tipo de Licença: Tipo A</p>
+            <p>Número da Licença: 12345</p>
+            <p>Protocolar até: 01/05/2022</p>
+            <p>Vencimento: 30/09/2022</p>
+            <button id="conferir-arquivos">Conferir Arquivos</button>
+
+        </div>
+        <div class="patente-item categoria-atrasadas" 
+             data-nome="Licença Atrasada 1" 
+             data-cliente="Cliente B" 
+             data-tipo="Tipo B" 
+             data-numero="67890" 
+             data-protocolar="15/03/2022" 
+             data-vencimento="15/08/2022">
+            <h3>Licença Atrasada 1</h3>
+            <p>Cliente: Cliente B</p>
+            <p>Tipo de Licença: Tipo B</p>
+            <p>Número da Licença: 67890</p>
+            <p>Protocolar até: 15/03/2022</p>
+            <p>Vencimento: 15/08/2022</p>
+            <button id="conferir-arquivos">Conferir Arquivos</button>
+
+        </div>
+        <div class="patente-item categoria-programadas" 
+             data-nome="Licença Programada 1" 
+             data-cliente="Cliente C" 
+             data-tipo="Tipo C" 
+             data-numero="54321" 
+             data-protocolar="01/02/2023" 
+             data-vencimento="10/12/2023">
+            <h3>Licença Programada 1</h3>
+            <p>Cliente: Cliente C</p>
+            <p>Tipo de Licença: Tipo C</p>
+            <p>Número da Licença: 54321</p>
+            <p>Protocolar até: 01/02/2023</p>
+            <p>Vencimento: 10/12/2023</p>
+            <button id="conferir-arquivos">Conferir Arquivos</button>
+
+        </div>
+        <div class="patente-item categoria-acompanhamento" 
+             data-nome="Licença Acompanhamento 1" 
+             data-cliente="Cliente D" 
+             data-tipo="Tipo D" 
+             data-numero="98765" 
+             data-protocolar="05/03/2024" 
+             data-vencimento="10/12/2024">
+            <h3>Licença Acompanhamento 1</h3>
+            <p>Cliente: Cliente D</p>
+            <p>Tipo de Licença: Tipo D</p>
+            <p>Número da Licença: 98765</p>
+            <p>Protocolar até: 05/03/2024</p>
+            <p>Vencimento: 10/12/2024</p>
+            <button id="conferir-arquivos">Conferir Arquivos</button>
+
+        </div>
+        <div class="patente-item categoria-acompanhamento" 
+             data-nome="Licença Acompanhamento 2" 
+             data-cliente="Cliente E" 
+             data-tipo="Tipo E" 
+             data-numero="13579" 
+             data-protocolar="20/06/2022" 
+             data-vencimento="05/06/2023">
+            <h3>Licença Acompanhamento 2</h3>
+            <p>Cliente: Cliente E</p>
+            <p>Tipo de Licença: Tipo E</p>
+            <p>Número da Licença: 13579</p>
+            <p>Protocolar até: 20/06/2022</p>
+            <p>Vencimento: 05/06/2023</p>
+            <button id="conferir-arquivos">Conferir Arquivos</button>
+
+        </div>
+    </div>
+
+    <div class="cliente-info">
+        <h2>Informações do Cliente</h2>
+        <div class="cliente-details">
+            <!-- Informações detalhadas do cliente serão exibidas aqui -->
+        </div>
+    </div>
+
+    <!-- Seção para exibir o total de patentes em cada categoria -->
+    <div class="categoria-total">
+        <p>Total de Patentes:</p>
+        <p>Vencidas: <span id="totalVencidas">0</span></p>
+        <p>Atrasadas: <span id="totalAtrasadas">0</span></p>
+        <p>Programadas: <span id="totalProgramadas">0</span></p>
+        <p>Em Acompanhamento: <span id="totalAcompanhamento">0</span></p>
+    </div>
+
+    <script>
+        // Suponha que você tenha uma lista de patentes e informações de clientes em objetos JavaScript.
+        const patentes = [
+            { nome: 'Licença Vencida 1', categoria: 'vencidas', cliente: 'Cliente A', tipo: 'Tipo A', numero: '12345', protocolar: '01/05/2022', vencimento: '30/09/2022' },
+            { nome: 'Licença Atrasada 1', categoria: 'atrasadas', cliente: 'Cliente B', tipo: 'Tipo B', numero: '67890', protocolar: '15/03/2022', vencimento: '15/08/2022' },
+            { nome: 'Licença Programada 1', categoria: 'programadas', cliente: 'Cliente C', tipo: 'Tipo C', numero: '54321', protocolar: '01/02/2023', vencimento: '10/12/2023' },
+            { nome: 'Licença Acompanhamento 1', categoria: 'acompanhamento', cliente: 'Cliente D', tipo: 'Tipo D', numero: '98765', protocolar: '05/03/2024', vencimento: '10/12/2024' },
+            { nome: 'Licença Acompanhamento 2', categoria: 'acompanhamento', cliente: 'Cliente E', tipo: 'Tipo E', numero: '13579', protocolar: '20/06/2022', vencimento: '05/06/2023' },
+        ];
+
+        // Função para exibir patentes com base na categoria selecionada
+        function exibirPatentes(categoria) {
+            const patenteItems = document.querySelectorAll('.patente-item');
+            const totalElement = document.getElementById(`total${categoria.charAt(0).toUpperCase() + categoria.slice(1)}`);
+            let total = 0;
+
+            patenteItems.forEach(patenteItem => {
+                patenteItem.style.display = 'none'; // Oculta todas as patentes
+
+                const patenteCategoria = patenteItem.classList[1]; // Obtém a categoria da patente
+
+                if (patenteCategoria === `categoria-${categoria}` || categoria === 'acompanhamento') {
+                    patenteItem.style.display = 'block'; // Exibe patentes da categoria selecionada
+                    total++;
+                }
+            });
+
+            totalElement.textContent = total; // Atualiza o total na seção
+        }
+
+        // Função para exibir informações detalhadas do cliente
+        function exibirInformacoesCliente(patenteItem) {
+            const clienteDetails = document.querySelector('.cliente-details');
+            clienteDetails.innerHTML = ''; // Limpa as informações anteriores
+
+            const nome = patenteItem.getAttribute('data-nome');
+            const cliente = patenteItem.getAttribute('data-cliente');
+            const tipo = patenteItem.getAttribute('data-tipo');
+            const numero = patenteItem.getAttribute('data-numero');
+            const protocolar = patenteItem.getAttribute('data-protocolar');
+            const vencimento = patenteItem.getAttribute('data-vencimento');
+
+            // Exemplo de informações detalhadas do cliente
+            const clienteInfo = document.createElement('div');
+            clienteInfo.innerHTML = `
+                <p><strong>Nome da Licença:</strong> ${nome}</p>
+                <p><strong>Cliente:</strong> ${cliente}</p>
+                <p><strong>Tipo de Licença:</strong> ${tipo}</p>
+                <p><strong>Número da Licença:</strong> ${numero}</p>
+                <p><strong>Protocolar até:</strong> ${protocolar}</p>
+                <p><strong>Vencimento:</strong> ${vencimento}</p>
+                <!-- Adicione mais informações conforme necessário -->
+            `;
+
+            clienteDetails.appendChild(clienteInfo);
+            clienteDetails.style.display = 'block'; // Exibe as informações do cliente
+        }
+
+        // Adicione manipuladores de evento para os links de categoria
+        document.getElementById('vencidas').addEventListener('click', () => exibirPatentes('vencidas'));
+        document.getElementById('atrasadas').addEventListener('click', () => exibirPatentes('atrasadas'));
+        document.getElementById('programadas').addEventListener('click', () => exibirPatentes('programadas'));
+        document.getElementById('acompanhamento').addEventListener('click', () => exibirPatentes('acompanhamento'));
+
+        // Adicione um evento de clique para exibir informações do cliente quando uma patente é clicada
+        const patenteItems = document.querySelectorAll('.patente-item');
+        patenteItems.forEach(patenteItem => {
+            patenteItem.addEventListener('click', () => {
+                exibirInformacoesCliente(patenteItem);
+            });
+        });
+    </script>
+</body>
+</html>
