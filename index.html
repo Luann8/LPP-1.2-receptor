@@ -5,7 +5,34 @@
     <title>Monitoramento de Patentes</title>
     <style>
         /* Estilos CSS */
-    
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Cor de fundo do site */
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
+        .map {
+            flex: 1;
+            background-color: #333; /* Cor de fundo do mapa (pode ser personalizado) */
+            color: #fff;
+            padding: 20px;
+        }
+
+        .map h2 {
+            margin-bottom: 20px;
+        }
+
+        .content {
+            flex: 2;
+            padding: 20px;
+        }
+
         .navbar {
             background-color: #333;
             color: #fff;
@@ -32,8 +59,10 @@
         }
 
         .patente-list {
-            margin-top: 20px;
-        }
+  overflow: auto;
+  height: 1200;
+  width: 1200;
+}
 
         .patente-items {
             list-style-type: none;
@@ -86,121 +115,139 @@
         }
     </style>
 </head>
-    <h2>licenças e patentes</h2>
-    <label for="nome">Busca por nome:</label>
-    <input type="text" id="nome" placeholder="Digite seu cliente">
-
-
-    <button id="login-btn">Buscar</button>
-</div>
 <body>
-    <nav class="navbar">
-        <ul class="nav-list">
-            <li><a href="#" id="vencidas" style="color: #FF5733;"> Vencidas </a></li>
-            <li><a href="#" id="atrasadas" style="color: #f9c922;">Atrasadas</a></li>
-            <li><a href="#" id="programadas" style="color: #2EC4B6;">Programadas</a></li>
-            <li><a href="#" id="acompanhamento">Em Acompanhamento</a></li>
-        </ul>
-    </nav>
+    <div class="container">
+        <div class="map">
+            <h2>Seu Mapa</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29465.302763449716!2d-43.737928010920584!3d-22.610393335727476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x994de0906daee5%3A0x635ed114ffd1ee93!2sParacambi%2C%20RJ!5e0!3m2!1spt-BR!2sbr!4v1698258252693!5m2!1spt-BR!2sbr" width="600" height="850" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="content">
+            <h2>Monitoramento de Patentes</h2>
+            <label for="nome">Busca por nome:</label>
+            <input type="text" id="nome" placeholder="Digite o nome do cliente">
+            <button id="login-btn">Buscar</button>
 
-    <div class="patente-list">
-        <!-- Exemplo de patentes com informações detalhadas -->
-        <div class="patente-item categoria-vencidas" 
-             data-nome="Licença Vencida 1" 
-             data-cliente="Cliente A" 
-             data-tipo="Tipo A" 
-             data-numero="12345" 
-             data-protocolar="01/05/2022" 
-             data-vencimento="30/09/2022">
-            <h3>Licença Vencida 1</h3>
-            <p>Cliente: Cliente A</p>
-            <p>Tipo de Licença: Tipo A</p>
-            <p>Número da Licença: 12345</p>
-            <p>Protocolar até: 01/05/2022</p>
-            <p>Vencimento: 30/09/2022</p>
-            <button id="conferir-arquivos">Conferir Arquivos</button>
+            <nav class="navbar">
+                <ul class="nav-list">
+                    <li><a href="#" id="vencidas" style="color: #FF5733;"> Vencidas </a></li>
+                    <li><a href="#" id="atrasadas" style="color: #f9c922;">Atrasadas</a></li>
+                    <li><a href="#" id="programadas" style="color: #2EC4B6;">Programadas</a></li>
+                    <li><a href="#" id="acompanhamento">Em Acompanhamento</a></li>
+                </ul>
+            </nav>
+
+            <div class="patente-list">
+                <!-- Lista de patentes aqui -->
+            </div>
+
+            <div class="cliente-info">
+                <h2>Informações do Cliente</h2>
+                <div class="cliente-details">
+                    <!-- Informações detalhadas do cliente serão exibidas aqui -->
+                </div>
+            </div>
+            <div class="patente-list">
+                <div class="patente-list" style="height: 600px; width: 1220px;">
+                    <div class="patente-item categoria-vencidas" 
+                     data-nome="Licença Vencida 1" 
+                     data-cliente="Cliente A" 
+                     data-tipo="Tipo A" 
+                     data-numero="12345" 
+                     data-protocolar="01/05/2022" 
+                     data-vencimento="30/09/2022">
+                    <h3>Licença Vencida 1</h3>
+                    <p>Cliente: Cliente A</p>
+                    <p>Tipo de Licença: Tipo A</p>
+                    <p>Número da Licença: 12345</p>
+                    <p>Protocolar até: 01/05/2022</p>
+                    <p>Vencimento: 30/09/2022</p>
+                    <button id="conferir-arquivos">Conferir Arquivos</button>
+        
+                </div>
+                <div class="patente-item categoria-atrasadas" 
+                     data-nome="Licença Atrasada 1" 
+                     data-cliente="Cliente B" 
+                     data-tipo="Tipo B" 
+                     data-numero="67890" 
+                     data-protocolar="15/03/2022" 
+                     data-vencimento="15/08/2022">
+                    <h3>Licença Atrasada 1</h3>
+                    <p>Cliente: Cliente B</p>
+                    <p>Tipo de Licença: Tipo B</p>
+                    <p>Número da Licença: 67890</p>
+                    <p>Protocolar até: 15/03/2022</p>
+                    <p>Vencimento: 15/08/2022</p>
+                    <button id="conferir-arquivos">Conferir Arquivos</button>
+        
+                </div>
+                <div class="patente-item categoria-programadas" 
+                     data-nome="Licença Programada 1" 
+                     data-cliente="Cliente C" 
+                     data-tipo="Tipo C" 
+                     data-numero="54321" 
+                     data-protocolar="01/02/2023" 
+                     data-vencimento="10/12/2023">
+                    <h3>Licença Programada 1</h3>
+                    <p>Cliente: Cliente C</p>
+                    <p>Tipo de Licença: Tipo C</p>
+                    <p>Número da Licença: 54321</p>
+                    <p>Protocolar até: 01/02/2023</p>
+                    <p>Vencimento: 10/12/2023</p>
+                    <button id="conferir-arquivos">Conferir Arquivos</button>
+        
+                </div>
+                <div class="patente-item categoria-acompanhamento" 
+                     data-nome="Licença Acompanhamento 1" 
+                     data-cliente="Cliente D" 
+                     data-tipo="Tipo D" 
+                     data-numero="98765" 
+                     data-protocolar="05/03/2024" 
+                     data-vencimento="10/12/2024">
+                    <h3>Licença Acompanhamento 1</h3>
+                    <p>Cliente: Cliente D</p>
+                    <p>Tipo de Licença: Tipo D</p>
+                    <p>Número da Licença: 98765</p>
+                    <p>Protocolar até: 05/03/2024</p>
+                    <p>Vencimento: 10/12/2024</p>
+                    <button id="conferir-arquivos">Conferir Arquivos</button>
+        
+                </div>
+                <div class="patente-item categoria-acompanhamento" 
+                     data-nome="Licença Acompanhamento 2" 
+                     data-cliente="Cliente E" 
+                     data-tipo="Tipo E" 
+                     data-numero="13579" 
+                     data-protocolar="20/06/2022" 
+                     data-vencimento="05/06/2023">
+                    <h3>Licença Acompanhamento 2</h3>
+                    <p>Cliente: Cliente E</p>
+                    <p>Tipo de Licença: Tipo E</p>
+                    <p>Número da Licença: 13579</p>
+                    <p>Protocolar até: 20/06/2022</p>
+                    <p>Vencimento: 05/06/2023</p>
+                    <button id="conferir-arquivos">Conferir Arquivos</button>
+        
+                </div>
+            </div>
+        
+            <div class="cliente-info">
+                <h2>Informações do Cliente</h2>
+                <div class="cliente-details">
+                    <!-- Informações detalhadas do cliente serão exibidas aqui -->
+                </div>
+            </div>
+    
+
+            <!-- Seção para exibir o total de patentes em cada categoria -->
+            <div class="categoria-total">
+                <p>Total de Patentes:</p>
+                <p>Vencidas: <span id="totalVencidas">0</span></p>
+                <p>Atrasadas: <span id="totalAtrasadas">0</span></p>
+                <p>Programadas: <span id="totalProgramadas">0</span></p>
+                <p>Em Acompanhamento: <span id="totalAcompanhamento">0</span></p>
+            </div>
 
         </div>
-        <div class="patente-item categoria-atrasadas" 
-             data-nome="Licença Atrasada 1" 
-             data-cliente="Cliente B" 
-             data-tipo="Tipo B" 
-             data-numero="67890" 
-             data-protocolar="15/03/2022" 
-             data-vencimento="15/08/2022">
-            <h3>Licença Atrasada 1</h3>
-            <p>Cliente: Cliente B</p>
-            <p>Tipo de Licença: Tipo B</p>
-            <p>Número da Licença: 67890</p>
-            <p>Protocolar até: 15/03/2022</p>
-            <p>Vencimento: 15/08/2022</p>
-            <button id="conferir-arquivos">Conferir Arquivos</button>
-
-        </div>
-        <div class="patente-item categoria-programadas" 
-             data-nome="Licença Programada 1" 
-             data-cliente="Cliente C" 
-             data-tipo="Tipo C" 
-             data-numero="54321" 
-             data-protocolar="01/02/2023" 
-             data-vencimento="10/12/2023">
-            <h3>Licença Programada 1</h3>
-            <p>Cliente: Cliente C</p>
-            <p>Tipo de Licença: Tipo C</p>
-            <p>Número da Licença: 54321</p>
-            <p>Protocolar até: 01/02/2023</p>
-            <p>Vencimento: 10/12/2023</p>
-            <button id="conferir-arquivos">Conferir Arquivos</button>
-
-        </div>
-        <div class="patente-item categoria-acompanhamento" 
-             data-nome="Licença Acompanhamento 1" 
-             data-cliente="Cliente D" 
-             data-tipo="Tipo D" 
-             data-numero="98765" 
-             data-protocolar="05/03/2024" 
-             data-vencimento="10/12/2024">
-            <h3>Licença Acompanhamento 1</h3>
-            <p>Cliente: Cliente D</p>
-            <p>Tipo de Licença: Tipo D</p>
-            <p>Número da Licença: 98765</p>
-            <p>Protocolar até: 05/03/2024</p>
-            <p>Vencimento: 10/12/2024</p>
-            <button id="conferir-arquivos">Conferir Arquivos</button>
-
-        </div>
-        <div class="patente-item categoria-acompanhamento" 
-             data-nome="Licença Acompanhamento 2" 
-             data-cliente="Cliente E" 
-             data-tipo="Tipo E" 
-             data-numero="13579" 
-             data-protocolar="20/06/2022" 
-             data-vencimento="05/06/2023">
-            <h3>Licença Acompanhamento 2</h3>
-            <p>Cliente: Cliente E</p>
-            <p>Tipo de Licença: Tipo E</p>
-            <p>Número da Licença: 13579</p>
-            <p>Protocolar até: 20/06/2022</p>
-            <p>Vencimento: 05/06/2023</p>
-            <button id="conferir-arquivos">Conferir Arquivos</button>
-
-        </div>
-    </div>
-
-    <div class="cliente-info">
-        <h2>Informações do Cliente</h2>
-        <div class="cliente-details">
-            <!-- Informações detalhadas do cliente serão exibidas aqui -->
-        </div>
-    </div>
-
-    <!-- Seção para exibir o total de patentes em cada categoria -->
-    <div class="categoria-total">
-        <p>Total de Patentes:</p>
-        <p>Vencidas: <span id="totalVencidas">0</span></p>
-        <p>Atrasadas: <span id="totalAtrasadas">0</span></p>
-        <p>Programadas: <span id="totalProgramadas">0</span></p>
-        <p>Em Acompanhamento: <span id="totalAcompanhamento">0</span></p>
     </div>
 
     <script>
